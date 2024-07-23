@@ -32,7 +32,7 @@ export function DataTable<TData, TValue>({
   return (
     <div className="rounded-md border">
       <Table dir="rtl">
-        <TableHeader dir="rtl" >
+        <TableHeader dir="rtl">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
@@ -45,7 +45,7 @@ export function DataTable<TData, TValue>({
                           header.getContext()
                         )}
                   </TableHead>
-                )
+                );
               })}
             </TableRow>
           ))}
@@ -68,12 +68,12 @@ export function DataTable<TData, TValue>({
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
+                لا توجد بيانات متاحة
               </TableCell>
             </TableRow>
           )}
         </TableBody>
       </Table>
     </div>
-  )
+  );
 }
