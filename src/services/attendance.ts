@@ -68,7 +68,9 @@ export function getAllFormattedAttendance(): Attendance[] {
           date,
           signInTime,
           signOutTime,
-          workTime: `${workHours}س ${workMinutes}د`,
+          workTime: `${workHours?.toLocaleString(
+            "ar-eg"
+          )} س    ${workMinutes?.toLocaleString("ar-eg")} د`,
         });
       }
     }
