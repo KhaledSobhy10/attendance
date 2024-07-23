@@ -16,8 +16,15 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 
-export function getFormateTime (date?: number | Date | undefined):string{
-  return Intl.DateTimeFormat('ar-EG', { hour: '2-digit', minute: '2-digit', hour12: true }).format(date)
+export function getFormateTime(
+  date?: number | Date | undefined,
+  local = "ar-eg"
+): string {
+  return Intl.DateTimeFormat(local, {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  }).format(date);
 }
 
 
