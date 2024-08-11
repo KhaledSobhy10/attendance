@@ -35,3 +35,33 @@ export function getHoursBetweenTwoDates (firstTime:number,secondTime:number){
 
   return {workHours,workMinutes}
 }
+
+
+export function convertArabicTimeToEnglish(arabicTime: string): string {
+  // Define mappings for Arabic numerals to English numerals
+  const arabicToEnglishMap: { [key: string]: string } = {
+    "٠": "0",
+    "١": "1",
+    "٢": "2",
+    "٣": "3",
+    "٤": "4",
+    "٥": "5",
+    "٦": "6",
+    "٧": "7",
+    "٨": "8",
+    "٩": "9",
+  };
+
+  // Convert Arabic numerals to English numerals
+  let englishTime = arabicTime.replace(
+    /[٠-٩]/g,
+    (digit) => arabicToEnglishMap[digit]
+  );
+
+  // Replace Arabic AM/PM with English AM/PM
+  englishTime = englishTime.replace("ص", "AM").replace("م", "PM");
+
+  return englishTime;
+}
+
+

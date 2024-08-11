@@ -48,32 +48,44 @@ export function getActuallyWorkTime() {
 }
 
 export function getAllFormattedAttendance(): Attendance[] {
-    const storedAttendance = localStorage.getItem("attendance");
-    if (!storedAttendance) return [];
-  
-    const attendance: StoredAttendance = JSON.parse(storedAttendance);
-    const formattedAttendance: Attendance[] = [];
-  
-    for (const date in attendance) {
-      const record = attendance[date];
-      if (record[AttendanceEvent.SIGN_IN] && record[AttendanceEvent.SIGN_OUT]) {
-        const signInTime = record[AttendanceEvent.SIGN_IN];
-        const signOutTime = record[AttendanceEvent.SIGN_OUT];
-        const { workHours, workMinutes } = getHoursBetweenTwoDates(
-          signInTime,
-          signOutTime
-        );
-  
-        formattedAttendance.push({
-          date,
-          signInTime,
-          signOutTime,
-          workTime: `${workHours?.toLocaleString(
-            "ar-eg"
-          )} س    ${workMinutes?.toLocaleString("ar-eg")} د`,
-        });
-      }
+  const storedAttendance = localStorage.getItem("attendance");
+  if (!storedAttendance) return [];
+
+  const attendance: StoredAttendance = JSON.parse(storedAttendance);
+  const formattedAttendance: Attendance[] = [];
+
+  for (const date in attendance) {
+    const record = attendance[date];
+    if (record[AttendanceEvent.SIGN_IN] && record[AttendanceEvent.SIGN_OUT]) {
+      const signInTime = record[AttendanceEvent.SIGN_IN];
+      const signOutTime = record[AttendanceEvent.SIGN_OUT];
+      const { workHours, workMinutes } = getHoursBetweenTwoDates(
+        signInTime,
+        signOutTime
+      );
+
+      formattedAttendance.push({
+        date,
+        signInTime,
+        signOutTime,
+        workTime: `${workHours?.toLocaleString(
+          "ar-eg"
+        )} س    ${workMinutes?.toLocaleString("ar-eg")} د`,
+      });
     }
-    console.count()
-    return formattedAttendance;
   }
+  return formattedAttendance;
+}
+
+export function isExistEvent(event: AttendanceEvent): boolean {
+  const currentDate = getCurrentDate();
+
+  // Retrieve attendance from local storage
+  const storedAttendance = localStorage.getItem(LOCAL_STORAGE_KEY);
+  let attendance: StoredAttendance = storedAttendance
+    ? JSON.parse(storedAttendance)
+    : {};
+
+  // Ensure there's an attendance record for the current date
+  return !!attendance[currentDate]?.[event];
+}
