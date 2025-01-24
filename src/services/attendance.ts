@@ -5,10 +5,11 @@ import { Attendance, StoredAttendance } from "@/types";
 const LOCAL_STORAGE_KEY = "attendance";
 
 // Function to update attendance
-export function updateAttendance(event: AttendanceEvent): number {
-  const currentDate = getCurrentDate();
-  const currentTime = Date.now();
-
+export function updateAttendance(
+  event: AttendanceEvent,
+  currentDate = getCurrentDate(),
+  currentTime = Date.now()
+): number {
   // Retrieve attendance from local storage
   const storedAttendance = localStorage.getItem(LOCAL_STORAGE_KEY);
   let attendance: StoredAttendance = storedAttendance
@@ -77,9 +78,10 @@ export function getAllFormattedAttendance(): Attendance[] {
   return formattedAttendance;
 }
 
-export function isExistEvent(event: AttendanceEvent): boolean {
-  const currentDate = getCurrentDate();
-
+export function isExistEvent(
+  event: AttendanceEvent,
+  currentDate = getCurrentDate()
+): boolean {
   // Retrieve attendance from local storage
   const storedAttendance = localStorage.getItem(LOCAL_STORAGE_KEY);
   let attendance: StoredAttendance = storedAttendance

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AreSureAlert } from "./AreSureAlert";
 import { isExistEvent } from "@/services/attendance";
 import { AttendanceEvent } from "@/enums";
+import AddAttendance from "./AddAttendance";
 
 type Props = {};
 
@@ -63,6 +64,7 @@ export default function Actions({}: Props) {
         onCancelHandler={alert.onCancel}
         onContinueHandler={alert.onContinue}
       />
+      <AddAttendance />
     </div>
   );
 }

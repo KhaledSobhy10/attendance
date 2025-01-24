@@ -12,8 +12,8 @@ type HookProps = {};
 export default function useUpdateAttendance({}: HookProps) {
   const { dispatch } = useAttendance();
 
-  const signIn = () => {
-    const currentTime = updateAttendance(AttendanceEvent.SIGN_IN);
+  const signIn = (date?: string, time?: number) => {
+    const currentTime = updateAttendance(AttendanceEvent.SIGN_IN, date, time);
     toast("👋🏽 أهلًا وسهلًا", {
       closeButton: true,
       description: ` تم تسجيل الدخول الساعة ${getFormateTime(currentTime)}`,
@@ -21,8 +21,8 @@ export default function useUpdateAttendance({}: HookProps) {
     dispatch({ type: "FETCH_ATTENDANCE" });
   };
 
-  const signOut = () => {
-    const currentTime = updateAttendance(AttendanceEvent.SIGN_OUT);
+  const signOut = (date?: string, time?: number) => {
+    const currentTime = updateAttendance(AttendanceEvent.SIGN_OUT, date, time);
     toast("👋🏽 سلام", {
       description: (
         <div className="flex flex-col gap-2 mt-2">
@@ -62,7 +62,7 @@ export default function useUpdateAttendance({}: HookProps) {
           </span>
         </div>
       ),
-      duration: 5000,
+      duration: 2000,
       closeButton: true,
     });
     dispatch({ type: "FETCH_ATTENDANCE" });
