@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { format, formatDate } from "date-fns";
+import { formatDate } from "date-fns";
 import {
   Dialog,
   DialogContent,
@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { getCurrentDate, getHoursBetweenTwoDates } from "@/lib/utils";
+import { getHoursBetweenTwoDates } from "@/lib/utils";
 import useUpdateAttendance from "@/hooks/useUpdateAttendance";
 
 const AddAttendance: React.FC = () => {

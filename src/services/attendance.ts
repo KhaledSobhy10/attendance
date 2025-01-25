@@ -4,17 +4,24 @@ import { Attendance, StoredAttendance } from "@/types";
 
 const LOCAL_STORAGE_KEY = "attendance";
 
+// Retrieve attendance from local storage
+function getStoredAttendance() {
+  const storedAttendance = localStorage.getItem(LOCAL_STORAGE_KEY);
+  const attendance: StoredAttendance = storedAttendance
+    ? JSON.parse(storedAttendance)
+    : {};
+
+  return attendance;
+}
+
+
 // Function to update attendance
 export function updateAttendance(
   event: AttendanceEvent,
   currentDate = getCurrentDate(),
   currentTime = Date.now()
 ): number {
-  // Retrieve attendance from local storage
-  const storedAttendance = localStorage.getItem(LOCAL_STORAGE_KEY);
-  let attendance: StoredAttendance = storedAttendance
-    ? JSON.parse(storedAttendance)
-    : {};
+  let attendance: StoredAttendance = getStoredAttendance();
 
   // Ensure there's an attendance record for the current date
   if (!attendance[currentDate]) {
@@ -90,4 +97,17 @@ export function isExistEvent(
 
   // Ensure there's an attendance record for the current date
   return !!attendance[currentDate]?.[event];
+}
+
+// Remove attendance
+export function removeAttendance(date: string) {
+  let attendance: StoredAttendance = getStoredAttendance();
+  // Ensure there's an attendance record for the current date
+  
+
+  // Update the attendance record for the current date
+  delete attendance[date];
+
+  localStorage.setItem("attendance", JSON.stringify(attendance));
+
 }

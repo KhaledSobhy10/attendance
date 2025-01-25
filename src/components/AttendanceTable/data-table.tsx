@@ -59,7 +59,7 @@ export function DataTable<TData, TValue>({
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
-                className="text-start hover:cursor-pointer"
+                className="text-start hover:cursor-pointer select-none"
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
